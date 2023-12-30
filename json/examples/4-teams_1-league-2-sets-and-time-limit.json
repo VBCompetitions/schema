@@ -1,0 +1,39 @@
+{
+  "teams": [
+    { "id": "TM1", "name": "Team 1" },
+    { "id": "TM2", "name": "Team 2" },
+    { "id": "TM3", "name": "Team 3" },
+    { "id": "TM4", "name": "Team 4" }
+  ],
+  "name": "My Mini tournament",
+  "stages": [
+    {
+      "name": "League",
+      "id": "L",
+      "groups": [
+        {
+          "name": "League",
+          "id": "LG",
+          "type": "league",
+          "league": {
+            "ordering": [ "WINS", "PF", "PD", "H2H" ],
+            "points": {
+              "win": 3,
+              "lose": 1
+            }
+          },
+          "matchType": "sets",
+          "sets": {},
+          "matches": [
+            { "id": "LG1", "court": "1", "type": "match", "start": "09:20", "homeTeam": { "id": "TM2", "scores": [ 0, 0 ] }, "awayTeam": { "id": "TM4", "scores": [ 0, 0 ] }, "officials": { "team": "TM1" }},
+            { "id": "LG2", "court": "1", "type": "match", "start": "10:20", "homeTeam": { "id": "TM1", "scores": [] }, "awayTeam": { "id": "TM3", "scores": [] }, "officials": { "team": "TM2" }},
+            { "id": "LG3", "court": "1", "type": "match", "start": "11:20", "homeTeam": { "id": "TM2", "scores": [] }, "awayTeam": { "id": "TM3", "scores": [] }, "officials": { "team": "TM4" }},
+            { "id": "LG4", "court": "1", "type": "match", "start": "12:20", "homeTeam": { "id": "TM1", "scores": [] }, "awayTeam": { "id": "TM4", "scores": [] }, "officials": { "team": "TM3" }},
+            { "id": "LG5", "court": "1", "type": "match", "start": "13:20", "homeTeam": { "id": "TM3", "scores": [] }, "awayTeam": { "id": "TM4", "scores": [] }, "officials": { "team": "TM2" }},
+            { "id": "LG6", "court": "1", "type": "match", "start": "14:20", "homeTeam": { "id": "TM1", "scores": [] }, "awayTeam": { "id": "TM2", "scores": [] }, "officials": { "team": "TM4" }}
+          ]
+        }
+      ]
+    }
+  ]
+}
