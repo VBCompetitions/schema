@@ -14,12 +14,43 @@
     "name": {
       "description": "A name for the competition",
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "maxLength": 10000
     },
     "notes": {
       "description": "Free form string to add notes about the competition.  This can be used for arbitrary content that various implementations can use",
       "type": "string",
       "minLength": 1
+    },
+    "clubs": {
+      "description": "A list of clubs that the teams are in",
+      "type": "array",
+      "items": {
+        "description": "A club definition",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "An ID for the club, e.g. 'CLUB1'.  This must be unique within the competition.  It must contain only ASCII printable characters excluding \" : { } ? =",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+          },
+          "name": {
+            "description": "The name for the club",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "notes": {
+            "description": "Free form string to add notes about a club.  This can be used for arbitrary content that various implementations can use",
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["id", "name"]
+      }
     },
     "teams": {
       "description": "The list of all teams in this competition",
@@ -30,15 +61,17 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "description": "An ID for the team, e.g. 'TM1'.  This is used in the rest of the instance document to specify the team so must be unique within the competition.  It must only contain letters (upper or lowercase), and numbers",
+            "description": "An ID for the team, e.g. 'TM1'.  This is used in the rest of the instance document to specify the team so must be unique within the competition.  It must contain only ASCII printable characters excluding \" : { } ? =",
             "type": "string",
             "minLength": 1,
-            "pattern": "^[a-zA-Z0-9]*$"
+            "maxLength": 100,
+            "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
           },
           "name": {
             "description": "The name for the team",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 1000
           },
           "contacts": {
             "description": "A list of contact details for a team",
@@ -49,14 +82,17 @@
               "additionalProperties": false,
               "properties": {
                 "id": {
-                  "description": "A unique ID for this contact, e.g. 'TM1Contact1'.  This must be unique within the team",
+                  "description": "A unique ID for this contact, e.g. 'TM1Contact1'.  This must be unique within the team.  It must contain only ASCII printable characters excluding \" : { } ? =",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
                 },
                 "name": {
                   "description": "The name of this contact",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 1000
                 },
                 "roles": {
                   "description": "The roles of this contact within the team",
@@ -90,7 +126,8 @@
                   "items": {
                     "description": "A telephone number for this contact",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 50
                   }
                 }
               },
@@ -109,14 +146,17 @@
               "additionalProperties": false,
               "properties": {
                 "id": {
-                  "description": "A unique ID for this player. This may be the player's registration number.  This must be unique within the team",
+                  "description": "A unique ID for this player. This may be the player's registration number.  This must be unique within the team.  It must contain only ASCII printable characters excluding \" : { } ? =",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
                 },
                 "name": {
                   "description": "The name of this contact",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 1000
                 },
                 "number": {
                   "description": "The player's shirt number",
@@ -133,6 +173,12 @@
                 "id", "name"
               ]
             }
+          },
+          "club": {
+            "description": "The ID of the club this team is in",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
           },
           "notes": {
             "description": "Free form string to add notes about a team.  This can be used for arbitrary content that various implementations can use",
@@ -155,14 +201,17 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "description": "A unique ID for this stage, e.g. 'LG'",
+            "description": "A unique ID for this stage, e.g. 'LG'.  It must contain only ASCII printable characters excluding \" : { } ? =",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
           },
           "name": {
             "description": "Descriptive title for the stage, e.g. 'Pools'",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 1000
           },
           "notes": {
             "description": "Free form string to add notes about this stage.  This can be used for arbitrary content that various implementations can use",
@@ -187,14 +236,17 @@
               "additionalProperties": false,
               "properties": {
                 "id": {
-                  "description": "A unique ID for this group, e.g. 'P1'",
+                  "description": "A unique ID for this group, e.g. 'P1'.  It must contain only ASCII printable characters excluding \" : { } ? =",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
                 },
                 "name": {
                   "description": "Descriptive title for the group, e.g. 'Pool 1'",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "maxLength": 1000
                 },
                 "notes": {
                   "description": "Free form string to add notes about this group.  This can be used for arbitrary content that various implementations can use",
@@ -535,9 +587,10 @@
       "additionalProperties": false,
       "properties": {
         "id": {
-          "description": "The identifier for the team.  This may be an exact identifier or a team reference (see the documentation)",
+          "description": "The identifier for the team.  This can either be a team ID or a team reference (see the documentation)",
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "maxLength": 1000
         },
         "scores": {
           "description": "The array of set scores.  If the matchType is 'continuous' then only the first value in the array is used",
@@ -549,7 +602,7 @@
           }
         },
         "mvp": {
-          "description": "This team's most valuable player award",
+          "description": "This team's most valuable player award.  This can either be a name or a player reference",
           "type": "string",
           "minLength": 1
         },
@@ -579,7 +632,7 @@
           "description": "The list of players from this team that played in this match",
           "type": "array",
           "items": {
-            "description": "The IDs of the players",
+            "description": "The ID of the player as a player reference",
             "type": "string",
             "minLength": 1
           }
@@ -601,19 +654,23 @@
             "additionalProperties": false,
             "properties": {
               "id": {
-                "description": "An identifier for this match, i.e. a match number",
+                "description": "An identifier for this match, i.e. a match number.  It must contain only ASCII printable characters excluding \" : { } ? =",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
               },
               "court": {
                 "description": "The court that a match takes place on",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 1000
               },
               "venue": {
                 "description": "The venue that a match takes place at",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 10000
               },
               "type": {
                 "description": "The type of match, i.e. 'match'",
@@ -660,9 +717,10 @@
                     "additionalProperties": false,
                     "properties": {
                       "team": {
-                        "description": "The team assigned to referee the match",
+                        "description": "The team assigned to referee the match.  This can either be a team ID or a team reference",
                         "type": "string",
-                        "minLength": 1
+                        "minLength": 1,
+                        "maxLength": 1000
                       }
                     },
                     "required": [
@@ -684,10 +742,49 @@
                         "type": "string",
                         "minLength": 1
                       },
+                      "challenge": {
+                        "description": "The challenge referee, responsible for resolving challenges from the teams",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "assistantChallenge": {
+                        "description": "The assistant challenge referee, who assists the challenge referee",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "reserve": {
+                        "description": "The reserve referee",
+                        "type": "string",
+                        "minLength": 1
+                      },
                       "scorer": {
                         "description": "The scorer",
                         "type": "string",
                         "minLength": 1
+                      },
+                      "assistantScorer": {
+                        "description": "The assistant scorer",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "linespersons": {
+                        "description": "The list of linespersons",
+                        "type": "array",
+                        "items": {
+                          "description": "A linesperson",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4
+                        }
+                      },
+                      "ballCrew": {
+                        "description": "The list of people in charge of managing the game balls",
+                        "type": "array",
+                        "items": {
+                          "description": "A ball person",
+                          "type": "string",
+                          "minLength": 1
+                        }
                       }
                     },
                     "required": [
@@ -697,16 +794,18 @@
                 ]
               },
               "mvp": {
-                "description": "A most valuable player award for the match",
+                "description": "A most valuable player award for the match. This can either be a name a player reference of the form {TEAM-ID:PLAYER-ID}",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "maxLength": 203
               },
               "manager": {
                 "oneOf": [
                   {
                     "description": "The court manager in charge of this match",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "maxLength": 1000
                   },
                   {
                     "description": "The court managers for this match",
@@ -714,9 +813,10 @@
                     "additionalProperties": false,
                     "properties": {
                       "team": {
-                        "description": "The team assigned to manage the match",
+                        "description": "The team assigned to manage the match.  This can either be a team ID or a team reference",
                         "type": "string",
-                        "minLength": 1
+                        "minLength": 1,
+                        "maxLength": 1000
                       }
                     },
                     "required": [
@@ -771,7 +871,9 @@
               "name": {
                 "description": "The name for the break, e.g. 'Lunch break'",
                 "default": "Break",
-                "type": "string"
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
               }
             },
             "required": [

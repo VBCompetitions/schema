@@ -30,22 +30,24 @@ Any field in a match that can refer to a team can either use that team's ID dire
 A team reference is defined as follows:
 
 ```
-{STAGE-ID:GROUP-ID:TYPE-INDICATOR:ENTITY-INDICATOR}
+team reference = {STAGE-ID:GROUP-ID:TYPE-INDICATOR:ENTITY-INDICATOR}
 
 STAGE-ID - the ID for a stage
 
 GROUP-ID - the ID for a group
 
-TYPE-INDICATOR - an indicator of what to look up in the group.  One of
-  MATCH-ID - to look  up a match result
-  "league" - to look up a league position
+TYPE-INDICATOR - an indicator of what to look up in the group
+               - one of:
+                 - MATCH-ID - to look  up a match result
+                 - "league" - to look up a league position
 
 ENTITY-INDICATOR - an indicator of what to look up within the type
-  For MATCH-ID
-    "winner" - the match winner
-    "loser" - the match loser
-  For "league"
-    position (int) - the team in the given league position, e.g. "1" will return the league winner
+                 - For TYPE-INDICATOR = MATCH-ID, one of:
+                   - "winner" - the match winner
+                   - "loser" - the match loser
+                 - For TYPE-INDICATOR = "league", this is the league
+                  position as an integer, e.g. "1" will return the
+                  league winner
 ```
 
 For example:
@@ -65,3 +67,29 @@ To avoid this scenario, you can use a ternary statement.  This lets you say "if 
 For example:
 - `{S1:G1:league:1}==TM4?{S1:G1:league:2}:TM4` if the league winner in stage `S1`, group `G1` is `TM4` then resolve to the team in 2nd place, otherwise resolve to `TM4`
 - `{S1:G2:M1:winner}=={S1:G2:M3:winner}?{S1:G2:M1:loser}:{S1:G2:M1:winner}` if the winner of match `M1` in stage `S1`, group `G1` is the same as teh winner of match `M3` then resolve to the loser of match `M1`, otherwise resolve to the winner
+
+## Player References
+
+The player list in the home/away teams in a match may contain a list of player names, or player references (or a mix of both).
+
+A player reference is defined as follows:
+
+```
+player reference = PLAYER-ID
+                 | {PLAYER-ID}
+                 | {TEAM-ID:PLAYER-ID}
+
+TEAM-ID - the ID for the team the player is in
+        - when this is not present, it is assumed that the player is defined as part of the
+          home/away team that is playing that match
+        - when this is present, this may refer to any team defined in the competition.  This
+          allows players to "play up"/"play down" for a team other than their own.  Any
+          restriction on whether the player is in a team from the same club is not part of
+          the specification
+
+PLAYER-ID - the id for the player
+```
+
+The `TEAM-ID` and `PLAYER-ID` can be any ASCII character except the following: `"` `:` `{` `}` `?` `=`
+
+Note that the schema does not verify that the referenced player is defined, but implementations MUST
