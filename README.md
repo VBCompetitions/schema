@@ -49,6 +49,7 @@ ENTITY-INDICATOR - an indicator of what to look up within the type
                   position as an integer, e.g. "1" will return the
                   league winner
 ```
+The `STAGE-ID`, `GROUP-ID` and `MATCH-ID` can be any ASCII character except the following: `"` `:` `{` `}` `?` `=`
 
 For example:
 - `{STG1:GRP1:M1:winner}` refers to the winner of match `M1` in group `GRP1` in stage `STG1`.
