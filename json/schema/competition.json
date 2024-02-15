@@ -770,16 +770,17 @@
                       "linespersons": {
                         "description": "The list of linespersons",
                         "type": "array",
+                        "maxItems": 4,
                         "items": {
                           "description": "A linesperson",
                           "type": "string",
-                          "minLength": 1,
-                          "maxLength": 4
+                          "minLength": 1
                         }
                       },
                       "ballCrew": {
                         "description": "The list of people in charge of managing the game balls",
                         "type": "array",
+                        "maxItems": 100,
                         "items": {
                           "description": "A ball person",
                           "type": "string",
