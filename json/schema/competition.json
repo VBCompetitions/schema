@@ -826,6 +826,11 @@
                   }
                 ]
               },
+              "friendly": {
+                "description": "Whether the match is a friendly.  These matches do not contribute toward a league position.  If a team only participates in friendly matches then they are not included in the league table at all",
+                "type": "boolean",
+                "default": false
+              },
               "notes": {
                 "description": "Free form string to add notes about a match",
                 "type": "string",
