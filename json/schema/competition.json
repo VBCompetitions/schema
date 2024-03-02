@@ -11,6 +11,32 @@
       "default": "1.0.0",
       "enum": ["1.0.0"]
     },
+    "metadata": {
+      "description": "A list of key-value pairs representing metadata about the competition, where each key must be unique. This can be used for functionality such as associating a competition with a season, and searching for competitions with matching metadata",
+      "type": "array",
+      "minLength": 1,
+      "maxLength": 10000,
+      "items": {
+        "description": "A key-value pair",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "description": "The key for a metadata entry",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "value": {
+            "description": "The value for a metadata entry",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      },
+      "required": ["key", "value"]
+    },
     "name": {
       "description": "A name for the competition",
       "type": "string",
