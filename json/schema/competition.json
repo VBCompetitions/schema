@@ -14,8 +14,8 @@
     "metadata": {
       "description": "A list of key-value pairs representing metadata about the competition, where each key must be unique. This can be used for functionality such as associating a competition with a season, and searching for competitions with matching metadata",
       "type": "array",
-      "minLength": 1,
-      "maxLength": 10000,
+      "minItems": 1,
+      "maxItems": 1000,
       "items": {
         "description": "A key-value pair",
         "type": "object",
