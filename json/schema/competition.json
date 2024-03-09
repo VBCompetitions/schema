@@ -28,7 +28,7 @@
             "maxLength": 100
           },
           "value": {
-            "description": "The value for a metadata entry",
+            "description": "The value for a metadata entry.  Note that this must be a string, so values such as \"true\", \"false\" or \"null\" must be represented as a string",
             "type": "string",
             "minLength": 1,
             "maxLength": 1000
