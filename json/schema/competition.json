@@ -521,10 +521,12 @@
                   "then": {
                     "properties": {
                       "matches": {
+                        "type": "array",
                         "items": {
+                          "type": "object",
                           "properties": {
-                            "homeTeam": { "properties": { "scores": { "maxItems": 1 } } },
-                            "awayTeam": { "properties": { "scores": { "maxItems": 1 } } }
+                            "homeTeam": { "type": "object", "properties": { "scores": { "type": "array", "maxItems": 1 } } },
+                            "awayTeam": { "type": "object", "properties": { "scores": { "type": "array", "maxItems": 1 } } }
                           }
                         }
                       }
@@ -557,13 +559,13 @@
                   "if": {
                     "properties": {
                       "matchType": { "const": "continuous" },
-                      "matches": { "items": { "properties": { "type": { "const": "match" } } } }
+                      "matches": { "type": "array", "items": { "type": "object", "properties": { "type": { "const": "match" } } } }
                     },
                     "required": [ "matchType" ]
                   },
                   "then": {
                     "properties": {
-                      "matches": { "items": { "required": [ "complete" ] } }
+                      "matches": { "type": "array", "items": { "type": "object", "required": [ "complete" ] } }
                     }
                   }
                 }
