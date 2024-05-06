@@ -339,7 +339,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "ordering": {
-                      "description": "An array of parameters that define how the league positions are worked out, where the array position determines the precedence of that parameter, e.g. [ \"PTS\", \"SD\" ] means that league position is determined by league points, with ties decided by set difference.  Valid parameters are 'PTS'=league points, 'WINS'=wins, 'LOSSES'=losses, 'H2H'=head to head, PF'=points for, 'PA'=points against, 'PD'=points difference, 'SF'=sets for, 'SA'=sets against, 'SD'=set difference.  When comparing teams, a higher value for a parameter results in a higher league position except when comparing 'LOSSES', 'PA' and 'SA' (where a lower value results in a higher league position).  Note that 'H2H' only considers wins and losses between two teams; this means that, depending on whether draws are allowed or whether teams play each other multiple times, the head to head comparison may not be able to distinguish between two teams",
+                      "description": "An array of parameters that define how the league positions are worked out, where the array position determines the precedence of that parameter, e.g. [ \"PTS\", \"SD\" ] means that league position is determined by league points, with ties decided by set difference.  Valid parameters are 'PTS'=league points, 'WINS'=wins, 'LOSSES'=losses, 'H2H'=head to head, PF'=points for, 'PA'=points against, 'PD'=points difference, 'SF'=sets for, 'SA'=sets against, 'SD'=set difference, 'BP'=bonus points, 'PP'=penalty points.  When comparing teams, a higher value for a parameter results in a higher league position except when comparing 'LOSSES', 'PA', 'SA', and 'PP' (where a lower value results in a higher league position).  Note that 'H2H' only considers wins and losses between two teams; this means that, depending on whether draws are allowed or whether teams play each other multiple times, the head to head comparison may not be able to distinguish between two teams",
                       "type": "array",
                       "items": {
                         "description": "A parameter that defines the league position",
@@ -354,7 +354,9 @@
                           "PD",
                           "SF",
                           "SA",
-                          "SD"
+                          "SD",
+                          "BP",
+                          "PP"
                         ]
                       },
                       "minItems": 1
