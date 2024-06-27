@@ -210,34 +210,38 @@
           "teams": {
             "description": "An ordered list of teams the player is/has been registered for in this competition, in the order that they have been registered (and therefore transferred in the case of more than one entry).  A player can only be registered with one team at any time within this competition, meaning that if there are multiple teams listed, either all but the last entry MUST have an \"until\" value, or there must be no \"from\" or \"until\" values in any entry",
             "type": "array",
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "description": "The team ID that the player is/was registered with",
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 100,
-                "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+            "items": {
+              "description": "A Player's team registration entry, linking them to the specified team, potentially for the time period covered by \"from\" to \"until\"",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "description": "The team ID that the player is/was registered with",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+                },
+                "from": {
+                  "description": "The date from which the player is/was registered with this team.  When this is not present, there should not be any \"from\" or \"until\" values in any entry in this player's \"teams\" array",
+                  "type": "string",
+                  "format": "date"
+                },
+                "until": {
+                  "description": "The date up to which the player was registered with this team.  When a \"from\" date is specified and this is not, it should be taken that a player is still registered with this team",
+                  "type": "string",
+                  "format": "date"
+                },
+                "notes": {
+                  "description": "Free form string to add notes about this player's team entry.  This can be used for arbitrary content that various implementations can use",
+                  "type": "string",
+                  "minLength": 1
+                }
               },
-              "from": {
-                "description": "The date from which the player is/was registered with this team.  When this is not present, there should not be any \"from\" or \"until\" values in any entry in this player's \"teams\" array",
-                "type": "string",
-                "format": "date"
-              },
-              "until": {
-                "description": "The date up to which the player was registered with this team.  When a \"from\" date is specified and this is not, it should be taken that a player is still registered with this team",
-                "type": "string",
-                "format": "date"
-              },
-              "notes": {
-                "description": "Free form string to add notes about this player's team entry.  This can be used for arbitrary content that various implementations can use",
-                "type": "string",
-                "minLength": 1
-              }
-            },
-            "required": [
-              "id"
-            ]
+              "required": [
+                "id"
+              ]
+            }
           },
           "notes": {
             "description": "Free form string to add notes about the player.  This can be used for arbitrary content that various implementations can use",
