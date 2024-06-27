@@ -163,43 +163,6 @@
               ]
             }
           },
-          "players": {
-            "description": "A list of players for a team",
-            "type": "array",
-            "items": {
-              "description": "A single player in a team",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "id": {
-                  "description": "A unique ID for this player. This may be the player's registration number.  This must be unique within the team.  It must contain only ASCII printable characters excluding \" : { } ? =",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 100,
-                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
-                },
-                "name": {
-                  "description": "The name of this contact",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 1000
-                },
-                "number": {
-                  "description": "The player's shirt number",
-                  "type": "integer",
-                  "minimum": 1
-                },
-                "notes": {
-                  "description": "Free form string to add notes about the player.  This can be used for arbitrary content that various implementations can use",
-                  "type": "string",
-                  "minLength": 1
-                }
-              },
-              "required": [
-                "id", "name"
-              ]
-            }
-          },
           "club": {
             "description": "The ID of the club this team is in",
             "type": "string",
@@ -215,6 +178,70 @@
         "required": [
           "id",
           "name"
+        ]
+      }
+    },
+    "players": {
+      "description": "A list of players",
+      "type": "array",
+      "items": {
+        "description": "A single player",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "A unique ID for this player. This may be the player's registration number.  This must be unique within the competition.  It must contain only ASCII printable characters excluding \" : { } ? =",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+          },
+          "name": {
+            "description": "The name of this contact",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "number": {
+            "description": "The player's shirt number",
+            "type": "integer",
+            "minimum": 1
+          },
+          "teams": {
+            "description": "An ordered list of teams the player is/has been registered for in this competition, in the order that they have been registered (and therefore transferred in the case of more than one entry).  A player can only be registered with one team at any time within this competition, meaning that if there are multiple teams listed, either all but the last entry MUST have an \"until\" value, or there must be no \"from\" or \"until\" values in any entry",
+            "type": "array",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "description": "The team ID that the player is/was registered with",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+              },
+              "from": {
+                "description": "The date from which the player is/was registered with this team.  When this is not present, it is assumed Given a player ",
+                "type": "string",
+                "format": "date"
+              },
+              "until": {
+                "description": "The date up to which the player was registered with this team.  When a \"from\" date is specified and this is not, it should be taken that a player is still registered with this team",
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "notes": {
+            "description": "Free form string to add notes about the player.  This can be used for arbitrary content that various implementations can use",
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id", "name"
         ]
       }
     },
@@ -367,7 +394,7 @@
                       "additionalProperties": false,
                       "properties": {
                         "played": {
-                          "description": "Number of league points for playing the match",
+                          "description": "Number of league points for playing the match.  Note that a forfeit counts as a \"played\" match, so if this has a non-zero value and the desire is for a forfeit to yield zero points then the \"forfeit\" value should be set to the same as this value",
                           "type": "integer",
                           "default": 0
                         },
@@ -632,7 +659,7 @@
           }
         },
         "mvp": {
-          "description": "This team's most valuable player award.  This can either be a name or a player reference",
+          "description": "This team's most valuable player award.  This can either be a name or a reference to a player ID.  A reference takes the form {PLAYER_ID}",
           "type": "string",
           "minLength": 1
         },
@@ -659,10 +686,10 @@
           "minLength": 1
         },
         "players": {
-          "description": "The list of players from this team that played in this match",
+          "description": "The list of players from this team that played in this match.  This can be either a player's name or a reference to a player ID",
           "type": "array",
           "items": {
-            "description": "The ID of the player as a player reference",
+            "description": "Either the name of the player or a reference to a player ID.  A reference takes the form {PLAYER_ID}.  Not all entries need to be references, meaning that the document can allow a mix of registered players with a player ID, and unregistered players indicated just by name",
             "type": "string",
             "minLength": 1
           }
@@ -825,7 +852,7 @@
                 ]
               },
               "mvp": {
-                "description": "A most valuable player award for the match. This can either be a name a player reference of the form {TEAM-ID:PLAYER-ID}",
+                "description": "A most valuable player award for the match. This can either be a name or a reference to a player ID.  A reference takes the form {PLAYER_ID}",
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 203
