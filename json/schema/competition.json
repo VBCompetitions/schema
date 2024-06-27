@@ -211,7 +211,7 @@
             "description": "An ordered list of teams the player is/has been registered for in this competition, in the order that they have been registered (and therefore transferred in the case of more than one entry).  A player can only be registered with one team at any time within this competition, meaning that if there are multiple teams listed, either all but the last entry MUST have an \"until\" value, or there must be no \"from\" or \"until\" values in any entry",
             "type": "array",
             "items": {
-              "description": "",
+              "description": "A Player's team registration entry, linking them to the specified team, potentially for the time period covered by \"from\" to \"until\"",
               "type": "object",
               "additionalProperties": false,
               "properties": {
