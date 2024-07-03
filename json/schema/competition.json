@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/monkeysppp/VBCompetitions-schema/tree/1.0.0",
-  "title": "Definition of a competition in VolleyTourney",
+  "title": "Definition of a Volleyball Competition",
   "description": "This document contains the teams, the competition structure, the matches and the results of a volleyball competition",
   "type": "object",
   "properties": {
@@ -22,7 +22,7 @@
         "additionalProperties": false,
         "properties": {
           "key": {
-            "description": "The key for a metadata entry",
+            "description": "The key for a metadata entry.  The key must be unique within the Competition",
             "type": "string",
             "minLength": 1,
             "maxLength": 100
