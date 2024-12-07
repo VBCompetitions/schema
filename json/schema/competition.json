@@ -43,6 +43,75 @@
       "minLength": 1,
       "maxLength": 10000
     },
+    "contacts": {
+      "description": "A list of contact details for the competition",
+      "type": "array",
+      "items": {
+        "description": "A single contact for the competition",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "A unique ID for this contact, e.g. 'Contact1'.  This must be unique within the competition.  It must contain only ASCII printable characters excluding \" : { } ? =",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+          },
+          "name": {
+            "description": "The name of this contact",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "notes": {
+            "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+            "type": "string",
+            "minLength": 1
+          },
+          "roles": {
+            "description": "The roles of this contact within the competition",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "description": "A role of this contact",
+              "type": "string",
+              "default": "fixtures secretary",
+              "enum": ["director", "fixtures", "logistics", "communications", "officials", "results", "marketing", "safety", "volunteer", "welfare", "hospitality", "ceremonies", "secretary", "treasurer", "medic"]
+            }
+          },
+          "emails": {
+            "description": "The email addresses for this contact",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "description": "An email address for this contact",
+              "type": "string",
+              "format": "email",
+              "minLength": 3
+            }
+          },
+          "phones": {
+            "description": "The telephone numbers for this contact",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "description": "A telephone number for this contact",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
+            }
+          }
+        },
+        "required": [
+          "id",
+          "roles"
+        ]
+      }
+    },
     "notes": {
       "description": "Free form string to add notes about the competition.  This can be used for arbitrary content that various implementations can use",
       "type": "string",
@@ -68,6 +137,75 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1000
+          },
+          "contacts": {
+            "description": "A list of contact details for the club",
+            "type": "array",
+            "items": {
+              "description": "A single contact for the club",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "description": "A unique ID for this contact, e.g. 'CL1Contact1'.  This must be unique within the club.  It must contain only ASCII printable characters excluding \" : { } ? =",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^((?![\":{}?=])[\\x20-\\x7F])+$"
+                },
+                "name": {
+                  "description": "The name of this contact",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "notes": {
+                  "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "roles": {
+                  "description": "The roles of this contact within the competition",
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "description": "A role of this contact",
+                    "type": "string",
+                    "default": "fixtures secretary",
+                    "enum": ["chair", "vice chair", "treasurer", "secretary", "welfare", "communications", "marketing", "volunteer", "logistics", "coaching"]
+                  }
+                },
+                "emails": {
+                  "description": "The email addresses for this contact",
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "description": "An email address for this contact",
+                    "type": "string",
+                    "format": "email",
+                    "minLength": 3
+                  }
+                },
+                "phones": {
+                  "description": "The telephone numbers for this contact",
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "description": "A telephone number for this contact",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "roles"
+              ]
+            }
           },
           "notes": {
             "description": "Free form string to add notes about a club.  This can be used for arbitrary content that various implementations can use",
@@ -119,6 +257,11 @@
                   "type": "string",
                   "minLength": 1,
                   "maxLength": 1000
+                },
+                "notes": {
+                  "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+                  "type": "string",
+                  "minLength": 1
                 },
                 "roles": {
                   "description": "The roles of this contact within the team",
