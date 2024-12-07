@@ -64,6 +64,11 @@
             "minLength": 1,
             "maxLength": 1000
           },
+          "notes": {
+            "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+            "type": "string",
+            "minLength": 1
+          },
           "roles": {
             "description": "The roles of this contact within the competition",
             "type": "array",
@@ -153,6 +158,11 @@
                   "type": "string",
                   "minLength": 1,
                   "maxLength": 1000
+                },
+                "notes": {
+                  "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+                  "type": "string",
+                  "minLength": 1
                 },
                 "roles": {
                   "description": "The roles of this contact within the competition",
@@ -247,6 +257,11 @@
                   "type": "string",
                   "minLength": 1,
                   "maxLength": 1000
+                },
+                "notes": {
+                  "description": "Free form string to add notes about a contact.  This can be used for arbitrary content that various implementations can use",
+                  "type": "string",
+                  "minLength": 1
                 },
                 "roles": {
                   "description": "The roles of this contact within the team",
