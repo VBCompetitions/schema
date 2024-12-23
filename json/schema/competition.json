@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-11/schema#",
   "$id": "https://github.com/monkeysppp/VBCompetitions-schema/tree/1.0.0",
   "title": "Definition of a Volleyball Competition",
   "description": "This document contains the teams, the competition structure, the matches and the results of a volleyball competition",
