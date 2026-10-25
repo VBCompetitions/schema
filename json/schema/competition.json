@@ -586,11 +586,12 @@
                   ]
                 },
                 "matchType": {
-                  "description": "Are the matches played in sets or continuous points.  If this has the value 'sets' then the property 'sets' must be defined",
+                  "description": "\"sets\" means that the match is played in sets and the winner is the team with the most sets.  \"continuous\" means that the match is played using continuous scoring and the winner is the team with the most points.  \"sets-continuous\" means that the match is played in sets but if the team have equal number of sets then the winner is determined by the total number of points.  If this has the value 'sets' then the property 'sets' must be defined",
                   "type": "string",
                   "enum": [
                     "sets",
-                    "continuous"
+                    "continuous",
+                    "sets-continuous"
                   ]
                 },
                 "sets": {
